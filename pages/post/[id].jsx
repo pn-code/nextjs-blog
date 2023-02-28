@@ -1,9 +1,9 @@
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Link from "next/link";
 import DeletePostModal from "@/components/DeletePostModal";
+import CommentCard from "@/components/CommentCard";
 
 const PostDetails = () => {
     return (
@@ -77,6 +77,14 @@ const PostDetails = () => {
                     <Link href="/">Back</Link>
                     <DeletePostModal />
                 </Col>
+            </Row>
+            <Row className="mt-4">
+                <h6>Comments</h6>
+                <CommentCard />
+                <CommentCard />
+                <CommentCard />
+                <CommentCard />
+                <CommentCard />
             </Row>
         </Container>
     );
