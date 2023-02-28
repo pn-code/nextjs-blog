@@ -1,16 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const BlogPostCard = () => {
+const BlogPostCard = ({ title, content }) => {
     return (
         <Card>
-            <Card.Img variant="top" src="holder.js/100px180" />
             <Card.Body>
-                <Card.Title>Article Title</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                </Card.Text>
+                <Card.Title>{title}</Card.Title>
+                <Card.Text>{content.substring(0, 100)}...</Card.Text>
                 <Button variant="primary">Read More...</Button>
             </Card.Body>
         </Card>
