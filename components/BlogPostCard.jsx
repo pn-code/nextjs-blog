@@ -1,13 +1,13 @@
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Link from "next/link";
 
-const BlogPostCard = ({ title, content }) => {
+const BlogPostCard = ({ title, content, id }) => {
     return (
         <Card>
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{content.substring(0, 100)}...</Card.Text>
-                <Button variant="primary">Read More...</Button>
+                <Link href={`/post/${id}`}>Read More...</Link>
             </Card.Body>
         </Card>
     );
