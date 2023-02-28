@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 const NewPostForm = () => {
     const [postTitle, setPostTitle] = useState("");
     const [postContent, setPostContent] = useState("");
 
     const createPost = async (e) => {
-        const res = await axios.post("/api/post", { postTitle, postContent });
+        e.preventDefault();
+        const res = await axios.post("/api/posts", {
+            title: postTitle,
+            content: postContent,
+        });
+        console.log(res)
     };
 
     return (
-        <Form>
+        <Form onSubmit={(e) => createPost(e)}>
             <Form.Group className="mb-3" controlId="title">
                 <Form.Label>Title: </Form.Label>
                 <Form.Control
