@@ -12,8 +12,11 @@ const Feed = () => {
 
     const getPosts = async () => {
         const res = await axios.get("/api/posts");
-        setPosts(res.data);
-    };
+        if (!res.ok) {
+            console.log(res)
+        } 
+            setPosts(res.data);
+        }
 
     return (
         <Container>
