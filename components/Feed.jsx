@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import BlogPostCard from "./BlogPostCard";
+import Link from "next/link";
 
-const Feed = () => {
+const Feed = ({ admin }) => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -13,13 +14,14 @@ const Feed = () => {
     const getPosts = async () => {
         const res = await axios.get("/api/posts");
         if (!res.ok) {
-            console.log(res)
-        } 
-            setPosts(res.data);
+            console.log(res);
         }
+        setPosts(res.data);
+    };
 
     return (
         <Container>
+            {admin && <Link href="/new-post">New Post</Link>}
             <Row>
                 <Col>
                     {posts.map((post) => (
