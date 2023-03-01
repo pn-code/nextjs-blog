@@ -26,12 +26,10 @@ const PostDetails = ({ post }) => {
             </Row>
             <Row className="mt-4">
                 <h6>Comments</h6>
-                <CommentForm postId={post.id}/>
-                <CommentCard />
-                <CommentCard />
-                <CommentCard />
-                <CommentCard />
-                <CommentCard />
+                <CommentForm postId={post.id} />
+                {post.comments.map((comment) => (
+                    <CommentCard comment={comment} key={comment.id} />
+                ))}
             </Row>
         </Container>
     );
