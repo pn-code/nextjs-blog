@@ -11,7 +11,6 @@ const NewPostForm = () => {
     const res = await axios.post("/api/posts", {
       title: postTitle,
       content: postContent,
-      authorId: 229829295,
     });
     console.log(res)
   };
