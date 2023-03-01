@@ -4,8 +4,11 @@ import DeletePostModal from "@/components/DeletePostModal";
 import CommentCard from "@/components/CommentCard";
 import axios from "axios";
 import CommentForm from "@/components/CommentForm";
+import { useState } from "react";
 
 const PostDetails = ({ post }) => {
+    const [comments, setComments] = useState(post.comments);
+
     return (
         <Container fluid className="mx-4 my-2">
             <Row>
@@ -26,8 +29,8 @@ const PostDetails = ({ post }) => {
             </Row>
             <Row className="mt-4">
                 <h6>Comments</h6>
-                <CommentForm postId={post.id} />
-                {post.comments.map((comment) => (
+                <CommentForm postId={post.id} setComments={setComments} />
+                {comments.map((comment) => (
                     <CommentCard comment={comment} key={comment.id} />
                 ))}
             </Row>
