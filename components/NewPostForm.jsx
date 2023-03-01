@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const NewPostForm = () => {
   const [postTitle, setPostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
+
+  const router = useRouter();
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -12,6 +15,7 @@ const NewPostForm = () => {
       title: postTitle,
       content: postContent,
     });
+    router.push("/")
     console.log(res)
   };
 
