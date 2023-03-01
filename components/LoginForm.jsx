@@ -2,14 +2,17 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const router = useRouter();
 
     const loginUser = async (e) => {
         e.preventDefault();
-        await axios.post("/api/login", { username, password });
+        await axios.post("/api/auth", { username, password });
+        router.push("/");
     };
 
     return (
