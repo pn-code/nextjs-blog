@@ -1,14 +1,20 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const CommentForm = () => {
+const CommentForm = ({ postId }) => {
     const [commentAuthor, setCommentAuthor] = useState("");
     const [commentContent, setCommentContent] = useState("");
 
-    const submitComment = (e) => {
-      e.preventDefault();
-    }
+    const submitComment = async (e) => {
+        e.preventDefault();
+        await axios.post("/api/comments", {
+            author: commentAuthor,
+            content: commentContent,
+            postId,
+        });
+    };
 
     return (
         <Form onSubmit={(e) => submitComment(e)} className="mb-3">
