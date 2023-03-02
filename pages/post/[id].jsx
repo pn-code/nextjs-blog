@@ -22,9 +22,11 @@ const PostDetails = ({ post, admin }) => {
                 </Col>
             </Row>
             <Row>
-                <Col className="gap-2">
+                <Col>
                     <Link href="/">Back</Link>
+                    <Link href={`/update-post/${post.id}`}>Edit</Link>
                     {admin && <DeletePostModal postId={post.id} />}
+
                 </Col>
             </Row>
             <Row className="mt-4">
