@@ -24,7 +24,7 @@ const PostDetails = ({ post }) => {
             <Row>
                 <Col className="gap-2">
                     <Link href="/">Back</Link>
-                    <DeletePostModal />
+                    <DeletePostModal postId={post.id} />
                 </Col>
             </Row>
             <Row className="mt-4">

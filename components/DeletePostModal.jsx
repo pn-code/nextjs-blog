@@ -1,12 +1,21 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useRouter } from "next/navigation";
 
-function DeletePostModal() {
+function DeletePostModal({ postId }) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const router = useRouter();
+    
+    const deletePost = async () => {
+        await axios.delete(`/api/posts/${postId}`)
+        router.push("/")
+    }
 
     return (
         <>
@@ -31,10 +40,10 @@ function DeletePostModal() {
                     Are you sure you want to delete this post?
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button onClick={handleClose} variant="secondary">
                         Close
                     </Button>
-                    <Button variant="danger">Delete Post</Button>
+                    <Button onClick={deletePost} variant="danger">Delete Post</Button>
                 </Modal.Footer>
             </Modal>
         </>
