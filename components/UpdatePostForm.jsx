@@ -1,29 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
-const NewPostForm = () => {
+const UpdatePostForm = ({ post }) => {
+    const [postTitle, setPostTitle] = useState(post.title);
+    const [postContent, setPostContent] = useState(post.content);
+
+    const router = useRouter();
+
+    const updatePost = async (e) => {
+        e.preventDefault();
+        const res = await axios.put(`/api/posts/${post.id}`, {
+            title: postTitle,
+            content: postContent,
+        });
+        router.push("/");
+        console.log(res);
+    };
+
     return (
-        <Form>
-            <Form.Group className="mb-3" controlId="formPostTitle">
+        <Form onSubmit={(e) => updatePost(e)}>
+            <Form.Group className="mb-3" controlId="title">
                 <Form.Label>Title: </Form.Label>
-                <Form.Control type="text" placeholder="Enter post title" />
+                <Form.Control
+                    onChange={(e) => setPostTitle(e.target.value)}
+                    value={postTitle}
+                    type="text"
+                    placeholder="Enter post title"
+                />
                 <Form.Text className="text-muted">
                     Think of an excellent title for your post.
                 </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formPostDescription">
-                <Form.Label>Description: </Form.Label>
-                <Form.Control type="text" placeholder="Enter post description" />
-                <Form.Text className="text-muted">
-                    Give a vivid description of your post. This will be
-                    displayed alongside your title on the blog post cards.
-                </Form.Text>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formPostBody">
-                <Form.Label>Body</Form.Label>
-                <Form.Control as="textarea" rows={10} placeholder="Enter post body..."/>
+            <Form.Group className="mb-3" controlId="content">
+                <Form.Label>Content</Form.Label>
+                <Form.Control
+                    onChange={(e) => setPostContent(e.target.value)}
+                    value={postContent}
+                    as="textarea"
+                    rows={10}
+                    placeholder="Enter post body..."
+                />
             </Form.Group>
 
             <Button variant="primary" type="submit">
@@ -33,4 +52,4 @@ const NewPostForm = () => {
     );
 };
 
-export default NewPostForm;
+export default UpdatePostForm;
