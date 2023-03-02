@@ -33,7 +33,7 @@ const PostDetails = ({ post, admin }) => {
                 <h6>Comments</h6>
                 <CommentForm postId={post.id} setComments={setComments} />
                 {comments.map((comment) => (
-                    <CommentCard comment={comment} key={comment.id} />
+                    <CommentCard comment={comment} key={comment.id} setComments={setComments}/>
                 ))}
             </Row>
         </Container>
