@@ -6,7 +6,7 @@ import axios from "axios";
 import CommentForm from "@/components/CommentForm";
 import { useState } from "react";
 
-const PostDetails = ({ post }) => {
+const PostDetails = ({ post, admin }) => {
     const [comments, setComments] = useState(post.comments);
 
     return (
@@ -24,7 +24,7 @@ const PostDetails = ({ post }) => {
             <Row>
                 <Col className="gap-2">
                     <Link href="/">Back</Link>
-                    <DeletePostModal postId={post.id} />
+                    {admin && <DeletePostModal postId={post.id} />}
                 </Col>
             </Row>
             <Row className="mt-4">
@@ -38,13 +38,20 @@ const PostDetails = ({ post }) => {
     );
 };
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ req, query }) {
     const { id: postId } = query;
+
+    const myCookie = req?.cookies || "";
+    let admin = false;
+
+    if (myCookie.token === process.env.TOKEN) {
+        admin = true;
+    }
     // Fetch data from external API
     const res = await axios.get(`http://localhost:3000/api/posts/${postId}`);
 
     // Pass data to the page via props
-    return { props: { post: res.data } };
+    return { props: { post: res.data, admin } };
 }
 
 export default PostDetails;
